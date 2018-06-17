@@ -2,9 +2,9 @@
 d-i debian-installer/add-kernel-opts string video=off\
  elevator=deadline console=ttyS0,115200
 
-# Skip creation of a normal user account.
-d-i passwd/make-user boolean false
-
+# Skip creation of a root account (normal user account will be able to
+# use sudo).
+d-i passwd/root-login boolean false
 
 # Any hostname and domain names assigned from dhcp take precedence over
 # values set here. However, setting the values still prevents the questions
@@ -77,8 +77,11 @@ d-i debian-installer/country string CH
 
 d-i time/zone string Europe/Zurich
 
-passwd   passwd/root-password    password pcengines
-passwd   passwd/root-password-again  password pcengines
+
+d-i passwd/user-fullname string PC Engines
+d-i passwd/username string pcengines
+d-i passwd/user-password password pcengines
+d-i passwd/root-password-again password pcengines
 
 
 d-i mirror/protocol string http
